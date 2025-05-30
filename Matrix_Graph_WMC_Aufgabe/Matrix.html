@@ -2,127 +2,242 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Matrixfunktionen</title>
+  <title>GraphMatrix - Advanced Analytics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
+  <!-- CSS & Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Eigene Styles -->
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #000;
-      color: white;
-      position: relative;
-      z-index: 1;
-    }
-
-    .container, nav {
-      position: relative;
-      z-index: 10;
-    }
-
-    #background-animation {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-
-    #background-animation i {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      animation: screen 8s infinite ease-in-out;
-      opacity: 0;
-    }
-
-    @keyframes screen {
-      0% { opacity: 0; transform: scale3d(1, 1, 1); }
-      25% { opacity: 0.3; transform: scale3d(3, 3, 4); }
-      50% { opacity: 0.75; }
-      75% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    #background-animation i:nth-child(1) { top:20px; left:30px; background: radial-gradient(circle, rgba(2,226,252,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #02e2fc; animation-duration: 5s; }
-    #background-animation i:nth-child(2) { top:420px; left:30px; background: radial-gradient(circle, rgba(250,160,2,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #faa002; animation-duration: 8s; }
-    #background-animation i:nth-child(3) { top:550px; left:880px; background: radial-gradient(circle, rgba(20,252,2,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #14fc02; animation-duration: 6s; }
-    #background-animation i:nth-child(4) { top:5px; left:1030px; background: radial-gradient(circle, rgba(252,2,196,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #fc02c4; animation-duration: 7s; }
-    #background-animation i:nth-child(5) { top:280px; left:12px; background: radial-gradient(circle, rgba(139,44,148,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #8b2c94; animation-duration: 9s; }
-    #background-animation i:nth-child(6) { top:620px; left:730px; background: radial-gradient(circle, rgba(255,51,0,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #FF3300; animation-duration: 5s; }
-    #background-animation i:nth-child(7) { top:100px; left:600px; background: radial-gradient(circle, rgba(0,255,255,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #00FFFF; animation-duration: 6s; }
-    #background-animation i:nth-child(8) { top:320px; left:500px; background: radial-gradient(circle, rgba(255,0,102,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #FF0066; animation-duration: 10s; }
-    #background-animation i:nth-child(9) { top:780px; left:100px; background: radial-gradient(circle, rgba(255,255,0,0.65), rgba(0,0,0,0)); box-shadow:0 0 5px #FFFF00; animation-duration: 4s; }
-    #background-animation i:nth-child(10){ top:450px; left:1000px; background: radial-gradient(circle, rgba(127,175,27,0.65), rgba(0,0,0,0)); box-shadow: 0 0 5px #7FAF1B; animation-duration: 7s; }
-  </style>
+  <link rel="stylesheet" href="/Matrix_Graph_WMC_Aufgabe/stylebeide.css">
 </head>
 <body>
+ 
+  <!-- Animated Background -->
   <div id="background-animation">
-    <i></i><i></i><i></i><i></i><i></i>
-    <i></i><i></i><i></i><i></i><i></i>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">GraphMatrix</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="Matrix.html">Matrixfunktionen</a></li>
-          <li class="nav-item"><a class="nav-link" href="dijkstra.html">Analyse</a></li>
+      <a class="navbar-brand" href="#home">🌐 GraphMatrix Analytics</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="#matrix">Matrix Operations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#weather">Weather Data</a></li>
+          <li class="nav-item"><a class="nav-link" href="#crypto">Crypto Tracker</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quotes">Daily Quotes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#analytics">Analytics</a></li>
         </ul>
+        <div class="d-flex">
+          <span class="navbar-text me-3">
+            <span class="api-status api-loading" id="apiStatus"></span>
+            <span id="apiStatusText">Connecting...</span>
+          </span>
+        </div>
       </div>
     </div>
   </nav>
 
-  <div class="container mt-4">
-    <h1 class="mb-4">Matrixfunktionen</h1>
+  <div class="main-content">
+    <div class="container mt-4">
+      
+      <!-- Section 1: Matrix Operations -->
+      <section id="matrix" class="mb-5">
+        <div class="glass-card">
+          <div class="section-header">
+            <h2 class="mb-0">🔢 Matrix Operations & Graph Analysis</h2>
+          </div>
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="nodesInput" class="form-label">Graph Nodes (e.g., A,B,C,D)</label>
+                  <input type="text" id="nodesInput" class="form-control" placeholder="A,B,C,D" value="A,B,C">
+                </div>
+                <div class="mb-3">
+                  <label for="edgesInput" class="form-label">Graph Edges (e.g., A,B;B,C;C,A)</label>
+                  <input type="text" id="edgesInput" class="form-control" placeholder="A,B;B,C;C,A" value="A,B;B,C">
+                </div>
+                <div class="mb-3">
+                  <label for="powerInput" class="form-label">Matrix Power (k):</label>
+                  <input type="number" id="powerInput" class="form-control" value="2" min="1" max="10">
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button id="adjBtn" class="btn btn-glow">Adjacency Matrix</button>
+                  <button id="powerBtn" class="btn btn-glow">Matrix Power</button>
+                  <button id="pathBtn" class="btn btn-secondary-glow">Path Matrix</button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="result-container" id="matrixResult">
+                  Click a button to calculate matrix operations...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <div class="card bg-dark text-white bg-opacity-75 mb-4">
-      <div class="card-header">Graph-Eingabe</div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label for="nodesInput" class="form-label">Knoten (z. B. A,B,C)</label>
-          <input type="text" id="nodesInput" class="form-control" placeholder="A,B,C">
+      <!-- Section 2: Weather Data -->
+      <section id="weather" class="mb-5">
+        <div class="glass-card">
+          <div class="section-header">
+            <h2 class="mb-0">🌤️ Real-Time Weather Data</h2>
+          </div>
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="cityInput" class="form-label">City Name</label>
+                  <input type="text" id="cityInput" class="form-control" placeholder="Vienna" value="Vienna">
+                </div>
+                <button id="weatherBtn" class="btn btn-glow">Get Weather</button>
+              </div>
+              <div class="col-md-6">
+                <div id="weatherResult" class="weather-info">
+                  <div class="status-loading">🌍 Ready to fetch weather data...</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="edgesInput" class="form-label">Kanten (z. B. A,B;B,C)</label>
-          <input type="text" id="edgesInput" class="form-control" placeholder="A,B;B,C">
+      </section>
+
+      <!-- Section 3: Cryptocurrency Tracker -->
+      <section id="crypto" class="mb-5">
+        <div class="glass-card">
+          <div class="section-header">
+            <h2 class="mb-0">₿ Cryptocurrency Tracker</h2>
+          </div>
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-4">
+                <button id="cryptoBtn" class="btn btn-glow mb-3">Refresh Crypto Prices</button>
+                <div class="chart-container">
+                  <canvas id="cryptoChart"></canvas>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="result-container" id="cryptoResult">
+                  <div class="status-loading">💰 Click refresh to load cryptocurrency data...</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button id="saveGraphBtn" class="btn btn-primary">Graph speichern</button>
-      </div>
+      </section>
+
+      <!-- Section 4: Daily Quotes -->
+      <section id="quotes" class="mb-5">
+        <div class="glass-card">
+          <div class="section-header">
+            <h2 class="mb-0">💭 Inspirational Quotes</h2>
+          </div>
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6">
+                <button id="quoteBtn" class="btn btn-glow mb-3">Get New Quote</button>
+                <div class="mb-3">
+                  <label for="categorySelect" class="form-label">Quote Category</label>
+                  <select id="categorySelect" class="form-control">
+                    <option value="inspirational">Inspirational</option>
+                    <option value="motivational">Motivational</option>
+                    <option value="success">Success</option>
+                    <option value="wisdom">Wisdom</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="result-container" id="quoteResult">
+                  <div class="status-loading">✨ Click to get an inspirational quote...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Analytics Dashboard -->
+      <section id="analytics" class="mb-5">
+        <div class="glass-card">
+          <div class="section-header">
+            <h2 class="mb-0">📊 Analytics Dashboard</h2>
+          </div>
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>API Usage Statistics</h5>
+                <div class="chart-container">
+                  <canvas id="usageChart"></canvas>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h5>System Performance</h5>
+                <div class="chart-container">
+                  <canvas id="performanceChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="result-container" id="analyticsResult">
+                  <h6 class="status-success">System Status: All APIs Operational</h6>
+                  <div class="row mt-3">
+                    <div class="col-md-3 text-center">
+                      <div class="h4 status-success" id="totalRequests">0</div>
+                      <small>Total Requests</small>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <div class="h4 status-success" id="successRate">100%</div>
+                      <small>Success Rate</small>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <div class="h4 status-success" id="avgResponse">~250ms</div>
+                      <small>Avg Response</small>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <div class="h4 status-success" id="uptime">99.9%</div>
+                      <small>Uptime</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
-
-    <section class="mb-5">
-      <h2>Adjazenzmatrix</h2>
-      <button id="adjazenzBtn" class="btn btn-outline-primary mb-3">Berechnen</button>
-      <div id="adjazenzErgebnis" class="bg-dark bg-opacity-50 p-3 rounded"></div>
-    </section>
-
-    <section class="mb-5">
-      <h2>Potenzmatrix</h2>
-      <div class="mb-2">
-        <label for="potenzInput" class="form-label">Exponent k:</label>
-        <input type="number" id="potenzInput" class="form-control w-25" value="2" min="1">
-      </div>
-      <button id="potenzBtn" class="btn btn-outline-secondary mb-3">A<sup>k</sup> berechnen</button>
-      <div id="potenzErgebnis" class="bg-dark bg-opacity-50 p-3 rounded"></div>
-    </section>
-
-    <section class="mb-5">
-      <h2>Wegmatrix</h2>
-      <button id="wegBtn" class="btn btn-outline-success mb-3">Berechnen</button>
-      <div id="wegErgebnis" class="bg-dark bg-opacity-50 p-3 rounded"></div>
-    </section>
   </div>
 
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="matrix.js"></script>
+
+  <script>
+  const AppState = {
+    apiCalls: 0,
+    errors: 0,
+    startTime: Date.now(),
+    usageData: {
+      matrix: 0,
+      weather: 0,
+      crypto: 0,
+      quotes: 0
+    }
+  };
+</script>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="/Matrix_Graph_WMC_Aufgabe/matrix.js"></script>
+
 </body>
 </html>
