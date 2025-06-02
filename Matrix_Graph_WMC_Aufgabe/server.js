@@ -134,6 +134,10 @@ function matrixPower(matrix, power) {
 // API ENDPOINTS FÜR MATRIX OPERATIONEN
 // =============================================================================
 
+app.get("/", (req, res) => {
+  res.send("Test erfolgreich")
+})
+
 // POST /api/matrix/adjacency
 app.post('/api/matrix/adjacency', (req, res) => {
   try {
